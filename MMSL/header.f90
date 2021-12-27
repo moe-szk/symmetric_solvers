@@ -3,10 +3,6 @@
   !
   ! header
   !
-  ! Moeto Suzuki
-  !
-  ! You can use all of the subroutines by including this file.
-  !
   !-----------------------------------------------------------------------------
   
   !------------------------------------------------------------
@@ -59,7 +55,7 @@
   ! Others
   !------------------------------------------------------------
   ! inverse matrix
-  include '../MMSL/inverse'
+  ! include '../MMSL/inverse'
   ! depress
   include '../MMSL/m_conv_2_iccg'
   include '../MMSL/m_upper_from_iccg'
