@@ -8,8 +8,11 @@ Liner equation solvers for sparse symmetric coefficient matrix
 - CR
 - MR
 - GD
+- SOR
+
+
 ### Solvers with preconditioning (incomplete Cholesky decomposition)
-- ICCG
+- Preconditioned CG (=ICCG)
 - Preconditioned MINRES
 - Preconditioned CR
 - Preconditioned MR
@@ -36,4 +39,3 @@ $$ A {\bf x} $$
 - m_icsl1d
 
 $$ A^{-1} {\bf x} $$
-
