@@ -1,4 +1,4 @@
-subroutine m_prod1d(n,n_nzr,nzu,nzl,iu,il,au,al,ad,x,ap,ksu,ksl)
+subroutine prod1d(n,n_nzr,nzu,nzl,iu,il,au,al,ad,x,ap,ksu,ksl)
   implicit real(8)(a-h,o-z)
   integer,intent(in)::n,nzu(n),nzl(n),il(n_nzr),iu(n_nzr),ksu(n),ksl(n)
   real(8),intent(in)::au(n_nzr),al(n_nzr),ad(n),x(n)
@@ -24,4 +24,4 @@ subroutine m_prod1d(n,n_nzr,nzu,nzl,iu,il,au,al,ad,x,ap,ksu,ksl)
      end do
      ap(k) = t
   end do
-  end subroutine m_prod1d
+  end subroutine prod1d
