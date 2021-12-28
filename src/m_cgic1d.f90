@@ -21,7 +21,7 @@ subroutine m_cgic1d(n,n_nzr,nzu,nzl,iu,il,au,al,ad,ksu,ksl,b,x,eps,itmax,iopt, &
   ! Initialization
   !
   error0 = 0.d0
-  call m_prod1d(n,nzu,nzl,iu,il,au,al,ad,x,ap,int(ksu),int(ksl))
+  call prod1d(n,n_nzr,nzu,nzl,iu,il,au,al,ad,x,ap,int(ksu),int(ksl))
 
   res2 = 0.d0
   do i=1,n
@@ -30,7 +30,7 @@ subroutine m_cgic1d(n,n_nzr,nzu,nzl,iu,il,au,al,ad,ksu,ksl,b,x,eps,itmax,iopt, &
   end do
   k = 0
 
-  call m_icsl1d(n,nzu,nzl,iu,il,uu,ul,ud,r,ru,int(ksu),int(ksl))
+  call icsl1d(n,n_nzr,nzu,nzl,iu,il,uu,ul,ud,r,ru,int(ksu),int(ksl))
 
   rur0 = 0.d0
 
@@ -50,7 +50,7 @@ subroutine m_cgic1d(n,n_nzr,nzu,nzl,iu,il,au,al,ad,ksu,ksl,b,x,eps,itmax,iopt, &
 
   do k=1,itmax
      
-     call m_prod1d(n,nzu,nzl,iu,il,au,al,ad,p,ap,int(ksu),int(ksl))
+     call prod1d(n,n_nzr,nzu,nzl,iu,il,au,al,ad,p,ap,int(ksu),int(ksl))
      
      pap = 0.d0
      do i=1,n
@@ -86,7 +86,7 @@ subroutine m_cgic1d(n,n_nzr,nzu,nzl,iu,il,au,al,ad,ksu,ksl,b,x,eps,itmax,iopt, &
      end if
      if(k==itmax) write(*,*)'** does not convergence **'
      
-     call m_icsl1d(n,nzu,nzl,iu,il,uu,ul,ud,r,ru,int(ksu),int(ksl))
+     call icsl1d(n,n_nzr,nzu,nzl,iu,il,uu,ul,ud,r,ru,int(ksu),int(ksl))
      
      rur1 = 0.d0
 
