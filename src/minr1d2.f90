@@ -47,7 +47,7 @@ subroutine minr1d2(kmax,n,nzu,nzl,iu,il,au,al,ad,ksu,ksl,b,x,eps,itmax,iopt,k)
   !
   ! Set v1vec
   !
-  call m_prod1d(n,kmax,nzu,nzl,iu,il,au,al,ad,x,ap,int(ksu),int(ksl))
+  call prod1d(n,kmax,nzu,nzl,iu,il,au,al,ad,x,ap,int(ksu),int(ksl))
   v1vec = b - ap
   v = v1vec
   !
@@ -65,7 +65,7 @@ subroutine minr1d2(kmax,n,nzu,nzl,iu,il,au,al,ad,ksu,ksl,b,x,eps,itmax,iopt,k)
   do j=1,itmax
      ! define v1(j)
      v1vec = v1vec / gamma1
-     call m_prod1d(n,kmax,nzu,nzl,iu,il,au,al,ad,v1vec,ap,int(ksu),int(ksl))
+     call prod1d(n,kmax,nzu,nzl,iu,il,au,al,ad,v1vec,ap,int(ksu),int(ksl))
      delta = dot_product(ap,v1vec)
      v2vec = ap - delta * v1vec - gamma1 * v0vec
      gamma2 = sqrt(sum(v2vec**2))
@@ -93,7 +93,7 @@ subroutine minr1d2(kmax,n,nzu,nzl,iu,il,au,al,ad,ksu,ksl,b,x,eps,itmax,iopt,k)
      !
      eta = -s1 * eta
      !error = abs(eta)
-     call m_prod1d(n,kmax,nzu,nzl,iu,il,au,al,ad,x,ax,int(ksu),int(ksl))
+     call prod1d(n,kmax,nzu,nzl,iu,il,au,al,ad,x,ax,int(ksu),int(ksl))
      r1 = b - ax
      error = sqrt(sum(r1**2))/sqrt(sum(v**2))
      !
@@ -117,7 +117,7 @@ subroutine minr1d2(kmax,n,nzu,nzl,iu,il,au,al,ad,ksu,ksl,b,x,eps,itmax,iopt,k)
         v0vec = 0.d0
         w0vec = 0.d0
         w1vec = 0.d0
-        call m_prod1d(n,kmax,nzu,nzl,iu,il,au,al,ad,x,ap,int(ksu),int(ksl))
+        call prod1d(n,kmax,nzu,nzl,iu,il,au,al,ad,x,ap,int(ksu),int(ksl))
         v1vec = b - ap
         gamma1 = sqrt(sum(v1vec**2))
         eta = gamma1
