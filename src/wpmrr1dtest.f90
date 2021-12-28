@@ -9,11 +9,11 @@ subroutine  wpmrr1d(n_nzr,n,nzu,nzl,iu,il,au,al,ad,ksu,ksl,b,x,eps,itmax,iopt&
   real(8),dimension(n)::r,p,z,ar,rd,s,kr
   real(8)::mu,nu,omg,zeta,alpha,beta,err,r0
   
-  call prod1d(n,nzu,nzl,iu,il,au,al,ad,x,ar,int(ksu),int(ksl))
+  call prod1d(n,n_nzr,nzu,nzl,iu,il,au,al,ad,x,ar,int(ksu),int(ksl))
   
   r = b - ar
   r0 = sqrt(sum(r**2))
-  call icsl1d(n,nzu,nzl,iu,il,uu,ul,ud,r,kr,int(ksu),int(ksl))
+  call icsl1d(n,n_nzr,nzu,nzl,iu,il,uu,ul,ud,r,kr,int(ksu),int(ksl))
   p =  -kr
   
   z = 0.d0
@@ -21,8 +21,8 @@ subroutine  wpmrr1d(n_nzr,n,nzu,nzl,iu,il,au,al,ad,ksu,ksl,b,x,eps,itmax,iopt&
   do j=1,itmax
 
      !call prod1d(n,nzu,nzl,iu,il,au,al,ad,r,ar,int(ksu),int(ksl))
-     call icsl1d(n,nzu,nzl,iu,il,uu,ul,ud,r,kr,int(ksu),int(ksl))
-     call prod1d(n,nzu,nzl,iu,il,au,al,ad,kr,ar,int(ksu),int(ksl))
+     call icsl1d(n,n_nzr,nzu,nzl,iu,il,uu,ul,ud,r,kr,int(ksu),int(ksl))
+     call prod1d(n,n_nzr,nzu,nzl,iu,il,au,al,ad,kr,ar,int(ksu),int(ksl))
      
      mu = dot_product(p,p)
      nu = dot_product(p,ar)
