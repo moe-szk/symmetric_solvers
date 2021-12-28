@@ -8,11 +8,11 @@ subroutine mr1d(n_nzr,n,nzu,nzl,iu,il,au,al,ad,ksu,ksl,b,x,eps,itmax,iopt)
   real(8),intent(inout)::x(n)
   real(8)::r(n),ap(n),alpha
   
-  call m_prod1d(n,n_nzr,nzu,nzl,iu,il,au,al,ad,x,ap,int(ksu),int(ksl))
+  call prod1d(n,n_nzr,nzu,nzl,iu,il,au,al,ad,x,ap,int(ksu),int(ksl))
   r = b - ap
 
   do j=1,itmax
-     call m_prod1d(n,n_nzr,nzu,nzl,iu,il,au,al,ad,r,ap,int(ksu),int(ksl))
+     call prod1d(n,n_nzr,nzu,nzl,iu,il,au,al,ad,r,ap,int(ksu),int(ksl))
      
      alpha = dot_product(r,ap)/dot_product(ap,ap)
 
