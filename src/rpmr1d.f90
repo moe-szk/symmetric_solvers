@@ -47,12 +47,12 @@ subroutine rpmr1d(kmax,n,nzu,nzl,iu,il,au,al,ad,ksu,ksl,b,x,eps,itmax,iopt,&
   !
   ! Set v1vec,u1vec
   !
-  call prod1d(n,nzu,nzl,iu,il,au,al,ad,x,ap,int(ksu),int(ksl))
+  call prod1d(n,n_nzr,nzu,nzl,iu,il,au,al,ad,x,ap,int(ksu),int(ksl))
   v1vec = b - ap
   v = sqrt(sum(v1vec**2))
   r = v
   
-  call icsl1d(n,nzu,nzl,iu,il,mu,ml,md,v1vec,u1vec,int(ksu),int(ksl))
+  call icsl1d(n,n_nzr,nzu,nzl,iu,il,mu,ml,md,v1vec,u1vec,int(ksu),int(ksl))
   !
   ! Set initial values
   !
@@ -73,11 +73,11 @@ subroutine rpmr1d(kmax,n,nzu,nzl,iu,il,au,al,ad,ksu,ksl,b,x,eps,itmax,iopt,&
      !
      ! Calculate v2,u2
      !
-     call prod1d(n,nzu,nzl,iu,il,au,al,ad,u1vec,ap,int(ksu),int(ksl))
+     call prod1d(n,n_nzr,nzu,nzl,iu,il,au,al,ad,u1vec,ap,int(ksu),int(ksl))
      delta = dot_product(u1vec,ap)
      v2vec = ap - delta * v1vec - gamma1 * v0vec
      
-     call icsl1d(n,nzu,nzl,iu,il,mu,ml,md,v2vec,u2vec,int(ksu),int(ksl))
+     call icsl1d(n,n_nzr,nzu,nzl,iu,il,mu,ml,md,v2vec,u2vec,int(ksu),int(ksl))
      !
      ! Calculate values
      !
