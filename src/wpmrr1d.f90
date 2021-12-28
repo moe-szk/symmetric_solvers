@@ -9,12 +9,12 @@ subroutine  wpmrr1d(n_nzr,n,nzu,nzl,iu,il,au,al,ad,ksu,ksl,b,x,eps,itmax,iopt&
   real(8),dimension(n)::r,y,z,ar,rd,s,kr
   real(8)::mu,nu,omg,zeta,gamma1,gamma2,err,r0
   
-  call prod1d(n,nzu,nzl,iu,il,au,al,ad,x,ar,int(ksu),int(ksl))
+  call prod1d(n,n_nzr,nzu,nzl,iu,il,au,al,ad,x,ar,int(ksu),int(ksl))
   
   r = b - ar
   r0 = sqrt(sum(r**2))
   
-  call icsl1d(n,nzu,nzl,iu,il,uu,ul,ud,r,kr,int(ksu),int(ksl))
+  call icsl1d(n,n_nzr,nzu,nzl,iu,il,uu,ul,ud,r,kr,int(ksu),int(ksl))
   y = - kr
   
   z = 0.d0
@@ -22,7 +22,7 @@ subroutine  wpmrr1d(n_nzr,n,nzu,nzl,iu,il,au,al,ad,ksu,ksl,b,x,eps,itmax,iopt&
   do j=1,itmax
 
      !call icsl1d(n,nzu,nzl,iu,il,uu,ul,ud,r1,kr,ksu,ksl)
-     call prod1d(n,nzu,nzl,iu,il,au,al,ad,r,ar,int(ksu),int(ksl))
+     call prod1d(n,n_nzr,nzu,nzl,iu,il,au,al,ad,r,ar,int(ksu),int(ksl))
      
      mu = dot_product(y,y)
      nu = dot_product(y,ar)
@@ -39,7 +39,7 @@ subroutine  wpmrr1d(n_nzr,n,nzu,nzl,iu,il,au,al,ad,ksu,ksl,b,x,eps,itmax,iopt&
      zeta = dot_product(rd,s)/dot_product(s,s)
      eta = gamma1 - zeta * gamma2
 
-     call icsl1d(n,nzu,nzl,iu,il,uu,ul,ud,r,kr,int(ksu),int(ksl))
+     call icsl1d(n,n_nzr,nzu,nzl,iu,il,uu,ul,ud,r,kr,int(ksu),int(ksl))
      !y =  eta * y + zeta * ar
      y = eta * y + zeta * kr
      z = eta * z - zeta * r
