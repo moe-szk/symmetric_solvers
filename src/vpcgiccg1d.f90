@@ -32,7 +32,7 @@ subroutine vpcgiccg1d(n_nzr,n,nzu,nzl,iu,il,au,al,ad,ksu,ksl,b,x,eps,itmax,iopt)
   nmax  = 10000
   !omega = 1.8d0
   !call sor_fast(r,ru,n,n_nzr,nzu,nzl,iu,il,au,al,ad,int(ksu),int(ksl),nmax,omega,eps1)
-  call iccg1d(n,n_nzr,nzu,nzl,iu,il,au,al,ad,ksu,ksl,r,ru,eps1,nmax,0)
+  call iccg1d(n_nzr,n,nzu,nzl,iu,il,au,al,ad,ksu,ksl,r,ru,eps1,nmax,0)
   !
   !
   !
@@ -86,7 +86,7 @@ subroutine vpcgiccg1d(n_nzr,n,nzu,nzl,iu,il,au,al,ad,ksu,ksl,b,x,eps,itmax,iopt)
      ! ICCG
      !
      !call sor_fast(r,ru,n,n_nzr,nzu,nzl,iu,il,au,al,ad,int(ksu),int(ksl),nmax,omega,eps1)
-     call iccg1d(n,n_nzr,nzu,nzl,iu,il,au,al,ad,ksu,ksl,r,ru,eps1,nmax,0)
+     call iccg1d(n_nzr,n,nzu,nzl,iu,il,au,al,ad,ksu,ksl,r,ru,eps1,nmax,0)
      !
      !
      !
