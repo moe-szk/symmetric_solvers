@@ -24,7 +24,7 @@ subroutine esmr1d2(n_nzr,n,nzu,nzl,iu,il,au,al,ad,ksu,ksl,b,x,eps,itmax,iopt, &
   real(8)::uu(n_nzr),ul(n_nzr),ud(n)
   zu = 0.d0
   zl = 0.d0
-  call m_icdc1d(n,n_nzr,nzu,nzl,iu,il,au,al,ad,ksu,ksl,uu,ul,ud)
+  call icdc1d(n,n_nzr,nzu,nzl,iu,il,au,al,ad,ksu,ksl,uu,ul,ud)
   !
   ! Initialization
   !
@@ -32,11 +32,11 @@ subroutine esmr1d2(n_nzr,n,nzu,nzl,iu,il,au,al,ad,ksu,ksl,b,x,eps,itmax,iopt, &
   w0vec = 0.d0
   w1vec = 0.d0
   
-  call m_prod1d(n,n_nzr,nzu,nzl,iu,il,au,al,ad,x,ap,int(ksu),int(ksl))
+  call prod1d(n,n_nzr,nzu,nzl,iu,il,au,al,ad,x,ap,int(ksu),int(ksl))
   v = b - ap
   
-  call m_icsl1d(n,n_nzr,nzu,nzl,iu,il,zu,ul,abs(ud)/omg,v,ap,int(ksu),int(ksl))
-  call m_prod1d(n,n_nzr,nzu,nzl,iu,il,zu,zl,sqrt(abs(ud)),ap,ax,int(ksu),int(ksl))
+  call icsl1d(n,n_nzr,nzu,nzl,iu,il,zu,ul,abs(ud)/omg,v,ap,int(ksu),int(ksl))
+  call prod1d(n,n_nzr,nzu,nzl,iu,il,zu,zl,sqrt(abs(ud)),ap,ax,int(ksu),int(ksl))
   v1vec = ax
 
   
@@ -58,12 +58,12 @@ subroutine esmr1d2(n_nzr,n,nzu,nzl,iu,il,au,al,ad,ksu,ksl,b,x,eps,itmax,iopt, &
      !
      ! Eisenstat's trick
      !
-     call m_prod1d(n,n_nzr,nzu,nzl,iu,il,zu,zl,sqrt(abs(ud)),v1vec,vbar,int(ksu),int(ksl))
-     call m_icsl1d(n,n_nzr,nzu,nzl,iu,il,uu,zl,abs(ud)/omg,vbar,y,int(ksu),int(ksl))
-     call m_prod1d(n,n_nzr,nzu,nzl,iu,il,zu,zl,((2.d0/omg*abs(ud))-ud),y,ap,int(ksu),int(ksl))
+     call prod1d(n,n_nzr,nzu,nzl,iu,il,zu,zl,sqrt(abs(ud)),v1vec,vbar,int(ksu),int(ksl))
+     call icsl1d(n,n_nzr,nzu,nzl,iu,il,uu,zl,abs(ud)/omg,vbar,y,int(ksu),int(ksl))
+     call prod1d(n,n_nzr,nzu,nzl,iu,il,zu,zl,((2.d0/omg*abs(ud))-ud),y,ap,int(ksu),int(ksl))
      ax = vbar - ap
-     call m_icsl1d(n,n_nzr,nzu,nzl,iu,il,zu,ul,abs(ud)/omg,ax,ap,int(ksu),int(ksl))
-     call m_prod1d(n,n_nzr,nzu,nzl,iu,il,zu,zl,sqrt(abs(ud)),y+ap,ax,int(ksu),int(ksl))
+     call icsl1d(n,n_nzr,nzu,nzl,iu,il,zu,ul,abs(ud)/omg,ax,ap,int(ksu),int(ksl))
+     call prod1d(n,n_nzr,nzu,nzl,iu,il,zu,zl,sqrt(abs(ud)),y+ap,ax,int(ksu),int(ksl))
      u1vec = ap
      
      delta = omg1**2 * dot_product(u1vec,v1vec)
@@ -86,7 +86,7 @@ subroutine esmr1d2(n_nzr,n,nzu,nzl,iu,il,au,al,ad,ksu,ksl,b,x,eps,itmax,iopt, &
      x = x + c1*eta * w2vec
      eta = - s1 * eta
 
-     call m_prod1d(n,n_nzr,nzu,nzl,iu,il,au,al,ad,x,ap,int(ksu),int(ksl))
+     call prod1d(n,n_nzr,nzu,nzl,iu,il,au,al,ad,x,ap,int(ksu),int(ksl))
      r = b - ap
      !call icsl1d(n,nzu,nzl,iu,il,au,al,ad,r,ap,int(ksu),int(ksl))
      !call m_prod1d(n,kmax,nzu,nzl,iu,il,au,al,ad,ap,ax,int(ksu),int(ksl))
