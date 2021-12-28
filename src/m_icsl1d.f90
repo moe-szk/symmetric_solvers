@@ -1,4 +1,4 @@
-subroutine m_icsl1d(n,n_nzr,nzu,nzl,iu,il,uu,ul,ud,b,x,kus,kls)
+subroutine icsl1d(n,n_nzr,nzu,nzl,iu,il,uu,ul,ud,b,x,kus,kls)
   implicit real(8)(a-h,o-z)
   integer,intent(in)::n,n_nzr
   integer,intent(in)::nzu(n),nzl(n),il(n_nzr),iu(n_nzr),kus(n),kls(n)
@@ -34,4 +34,4 @@ subroutine m_icsl1d(n,n_nzr,nzu,nzl,iu,il,uu,ul,ud,b,x,kus,kls)
      x(k)=x(k)-ud(k)*t
   end do
   return
-end subroutine m_icsl1d
+end subroutine icsl1d
