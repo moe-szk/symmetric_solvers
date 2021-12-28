@@ -19,7 +19,7 @@ subroutine vpcgsor1d(n_nzr,n,nzu,nzl,iu,il,au,al,ad,ksu,ksl,b,x,eps,itmax,iopt)
   !
   eps1 = 1.0e-3
   !
-  call prod1d(n,nzu,nzl,iu,il,au,al,ad,x,ap,int(ksu),int(ksl))
+  call prod1d(n,n_nzr,nzu,nzl,iu,il,au,al,ad,x,ap,int(ksu),int(ksl))
   !
   res2 = zero
   do i=1,n
@@ -52,7 +52,7 @@ subroutine vpcgsor1d(n_nzr,n,nzu,nzl,iu,il,au,al,ad,ksu,ksl,b,x,eps,itmax,iopt)
   !
   itmax = 1000
   do k=1,itmax
-     call prod1d(n,nzu,nzl,iu,il,au,al,ad,p,ap,int(ksu),int(ksl))
+     call prod1d(n,n_nzr,nzu,nzl,iu,il,au,al,ad,p,ap,int(ksu),int(ksl))
      pap = zero
      do i=1,n
         pap = pap+p(i)*ap(i)
