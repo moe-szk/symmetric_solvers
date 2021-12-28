@@ -11,14 +11,14 @@ subroutine wpgd1d(n_nzr,n,nzu,nzl,iu,il,au,al,ad,ksu,ksl,b,x,eps,itmax,iopt,&
   real(8)::r(n),kr(n),akr(n),alpha,r0
 
 
-  call prod1d(n,nzu,nzl,iu,il,au,al,ad,x,r,int(ksu),int(ksl))
+  call prod1d(n,n_nzr,nzu,nzl,iu,il,au,al,ad,x,r,int(ksu),int(ksl))
   r = b - r
   r0 = sum(r**2)
 
   do j=1,itmax
      
-     call icsl1d(n,nzu,nzl,iu,il,uu,ul,ud,r,kr,int(ksu),int(ksl))
-     call prod1d(n,nzu,nzl,iu,il,au,al,ad,kr,akr,int(ksu),int(ksl))
+     call icsl1d(n,n_nzr,nzu,nzl,iu,il,uu,ul,ud,r,kr,int(ksu),int(ksl))
+     call prod1d(n,n_nzr,nzu,nzl,iu,il,au,al,ad,kr,akr,int(ksu),int(ksl))
 
      alpha = dot_product(kr,r) / dot_product(kr,akr)
      
