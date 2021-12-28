@@ -8,13 +8,13 @@ subroutine gd1d(n_nzr,n,nzu,nzl,iu,il,au,al,ad,ksu,ksl,b,x,eps,itmax,iopt)
   real(8),intent(inout)::x(n)
   real(8)::r(n),ar(n),alpha,r0
   
-  call prod1d(n,nzu,nzl,iu,il,au,al,ad,x,ar,int(ksu),int(ksl))
+  call prod1d(n,n_nzr,nzu,nzl,iu,il,au,al,ad,x,ar,int(ksu),int(ksl))
   r = b - ar
   r0 = sum(r**2)
   
   do j=1,itmax
      
-     call prod1d(n,nzu,nzl,iu,il,au,al,ad,r,ar,int(ksu),int(ksl))
+     call prod1d(n,n_nzr,nzu,nzl,iu,il,au,al,ad,r,ar,int(ksu),int(ksl))
      
      alpha = dot_product(r,r) / dot_product(r,ar)
      !alpha = sqrt(sum(r**2)) / dot_product(r,ar)
