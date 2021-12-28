@@ -10,7 +10,7 @@ subroutine pgd1d(kmax,n,nzu,nzl,iu,il,au,al,ad,ksu,ksl,b,x,eps,itmax,iopt)
   call m_icdc1d(n,kmax,nzu,nzl,iu,il,au,al,ad,ksu,ksl,uu,ul,ud)
 
   call wpgd1d(kmax,n,nzu,nzl,iu,il,au,al,ad,ksu,ksl,b,x,eps,itmax,iopt,&
-       uu,ul,abs(ud))
+       uu,ul,ud)
 
   return
 end subroutine pgd1d
