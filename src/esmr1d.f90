@@ -30,12 +30,12 @@ subroutine esmr1d(n_nzr,n,nzu,nzl,iu,il,au,al,ad,ksu,ksl,b,x,eps,itmax,iopt, &
   w0vec = 0.d0
   w1vec = 0.d0
   
-  call m_prod1d(n,n_nzr,nzu,nzl,iu,il,au,al,ad,x,ap,int(ksu),int(ksl))
+  call prod1d(n,n_nzr,nzu,nzl,iu,il,au,al,ad,x,ap,int(ksu),int(ksl))
   v = b - ap
 
-  call m_icsl1d(n,n_nzr,nzu,nzl,iu,il,zu,al,abs(ad)/omg,v,ap,int(ksu),int(ksl))
+  call icsl1d(n,n_nzr,nzu,nzl,iu,il,zu,al,abs(ad)/omg,v,ap,int(ksu),int(ksl))
   write(*,*)ap
-  call m_prod1d(n,n_nzr,nzu,nzl,iu,il,zu,zl,sqrt(abs(ad)),ap,ax,int(ksu),int(ksl))
+  call prod1d(n,n_nzr,nzu,nzl,iu,il,zu,zl,sqrt(abs(ad)),ap,ax,int(ksu),int(ksl))
   v1vec = ax
   
   omg1 = (2.d0-omg)/omg
@@ -56,12 +56,12 @@ subroutine esmr1d(n_nzr,n,nzu,nzl,iu,il,au,al,ad,ksu,ksl,b,x,eps,itmax,iopt, &
      !
      ! Eisenstat's trick
      !
-     call m_prod1d(n,n_nzr,nzu,nzl,iu,il,zu,zl,sqrt(abs(ad)),v1vec,vbar,int(ksu),int(ksl))
-     call m_icsl1d(n,n_nzr,nzu,nzl,iu,il,au,zl,abs(ad)/omg,vbar,y,int(ksu),int(ksl))
-     call m_prod1d(n,n_nzr,nzu,nzl,iu,il,zu,zl,((2.d0/omg*abs(ad))-ad),y,ap,int(ksu),int(ksl))
+     call prod1d(n,n_nzr,nzu,nzl,iu,il,zu,zl,sqrt(abs(ad)),v1vec,vbar,int(ksu),int(ksl))
+     call icsl1d(n,n_nzr,nzu,nzl,iu,il,au,zl,abs(ad)/omg,vbar,y,int(ksu),int(ksl))
+     call prod1d(n,n_nzr,nzu,nzl,iu,il,zu,zl,((2.d0/omg*abs(ad))-ad),y,ap,int(ksu),int(ksl))
      ax = vbar - ap
-     call m_icsl1d(n,n_nzr,nzu,nzl,iu,il,zu,al,abs(ad)/omg,ax,ap,int(ksu),int(ksl))
-     call m_prod1d(n,n_nzr,nzu,nzl,iu,il,zu,zl,sqrt(abs(ad)),y+ap,ax,int(ksu),int(ksl))
+     call icsl1d(n,n_nzr,nzu,nzl,iu,il,zu,al,abs(ad)/omg,ax,ap,int(ksu),int(ksl))
+     call prod1d(n,n_nzr,nzu,nzl,iu,il,zu,zl,sqrt(abs(ad)),y+ap,ax,int(ksu),int(ksl))
      u1vec = ap
      
      delta = omg1**2 * dot_product(u1vec,v1vec)
@@ -84,7 +84,7 @@ subroutine esmr1d(n_nzr,n,nzu,nzl,iu,il,au,al,ad,ksu,ksl,b,x,eps,itmax,iopt, &
      x = x + c1*eta * w2vec
      eta = - s1 * eta
 
-     call m_prod1d(n,n_nzr,nzu,nzl,iu,il,au,al,ad,x,ap,int(ksu),int(ksl))
+     call prod1d(n,n_nzr,nzu,nzl,iu,il,au,al,ad,x,ap,int(ksu),int(ksl))
      r = b - ap
      !call icsl1d(n,nzu,nzl,iu,il,au,al,ad,r,ap,int(ksu),int(ksl))
      !call m_prod1d(n,kmax,nzu,nzl,iu,il,au,al,ad,ap,ax,int(ksu),int(ksl))
